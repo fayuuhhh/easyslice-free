@@ -11,13 +11,25 @@ document.getElementById("sliceBtn").onclick = async () => {
     return;
   }
 
-  resultBox.innerHTML = "Processing... This may take time ⏳";
+  resultBox.innerHTML = "Processing... ⏳ This may take a while";
 
   await ffmpeg.load();
   ffmpeg.FS("writeFile", "input.mp4", await fetchFile(videoFile));
 
-  const duration = 60 * 5; // simple demo default 5 min max
-  const parts = Math.floor(duration / seconds);
+  // Detect actual duration of video
+  await ffmpeg.run("-i", "input.mp4");
+
+  // Use ffprobe to get duration
+  const ffprobeOutput = ffmpeg.FS("readFile", "ffmpeg.log")?.toString() || "";
+  let duration = 0;
+  const match = ffprobeOutput.match(/Duration: (\d+):(\d+):(\d+\.\d+)/);
+  if (match) {
+    duration = parseInt(match[1]) * 3600 + parseInt(match[2]) * 60 + parseFloat(match[3]);
+  } else {
+    duration = videoFile.duration || 60; // fallback 60s
+  }
+
+  const parts = Math.ceil(duration / seconds);
 
   let html = "<h3>Download Clips</h3>";
 
@@ -36,7 +48,7 @@ document.getElementById("sliceBtn").onclick = async () => {
     const data = ffmpeg.FS("readFile", output);
     const url = URL.createObjectURL(new Blob([data.buffer], { type: "video/mp4" }));
 
-    html += `<a href="${url}" download="clip${i}.mp4">Download Clip ${i+1}</a><br>`;
+    html += `<a href="${url}" download="clip${i+1}.mp4">Download Clip ${i+1}</a><br>`;
   }
 
   resultBox.innerHTML = html;
