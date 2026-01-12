@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EasySlice Free</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>EasySlice – Free Video Auto Splitter</h1>
+    <p>Upload a video and slice it into clips instantly — free, no signup.</p>
+  </header>
+
+  <section class="upload-box">
+    <input type="file" id="videoInput" accept="video/*">
+    <input type="number" id="seconds" placeholder="Seconds per clip">
+    <button id="sliceBtn">Slice Video</button>
+  </section>
+
+  <section id="result"></section>
+
+  <footer>
+    Built for free use ❤️
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.2/dist/ffmpeg.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+header {
+  padding: 40px 20px;
+}
+
+.upload-box {
+  background: #131b2e;
+  padding: 30px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+}
+
+input, button {
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  max-width: 400px;
+}
+
+button {
+  background: #4d7cff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+button:hover {
+  background: #6e92ff;
+}
+
+#result {
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 20px;
+  opacity: .7;
+}
